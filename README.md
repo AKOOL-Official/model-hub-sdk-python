@@ -55,3 +55,7 @@ the package registry or a supplied wheel directory, never this repository's sour
 Verify package ownership and registry configuration before the initial upload.
 Publish with `uv publish dist/*` after review. No publication is performed by local builds.
 See `contracts/README.md` for backend-owned API contracts.
+
+## License
+
+[MIT](LICENSE), Copyright (c) 2026 AKOOL.
