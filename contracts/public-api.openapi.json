@@ -1,0 +1,2102 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Model Hub Public API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/client/capabilities": {
+      "get": {
+        "tags": [
+          "model-hub-client"
+        ],
+        "summary": "Capabilities",
+        "operationId": "getClientCapabilities",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientCapabilities"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/client/models": {
+      "get": {
+        "tags": [
+          "model-hub-client"
+        ],
+        "summary": "List Models For Key",
+        "description": "Models allowed by this key's effective permissions; no pool or route lookup.",
+        "operationId": "listKeyModels",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "name": "task_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Task Type"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Tags"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiModelListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/client/models/detail": {
+      "get": {
+        "tags": [
+          "model-hub-client"
+        ],
+        "summary": "Get Model For Key",
+        "operationId": "getKeyModel",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "title": "Model Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiModelDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/client/models/documentation/lang": {
+      "get": {
+        "tags": [
+          "model-hub-client"
+        ],
+        "summary": "Get Model Document For Key",
+        "operationId": "getKeyModelDocumentation",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "title": "Model Id"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 10,
+              "default": "en",
+              "title": "Language"
+            }
+          },
+          {
+            "name": "fallback",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Fallback"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/run/{model_id}": {
+      "post": {
+        "tags": [
+          "marketplace-run"
+        ],
+        "summary": "Run Model",
+        "operationId": "createTask",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Model Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          },
+          {
+            "name": "X-Request-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 36
+            },
+            "description": "Task ID and idempotency key. Reuse with identical input to recover the same submission."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelRunResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/run/tasks/{task_uuid}": {
+      "get": {
+        "tags": [
+          "marketplace-run"
+        ],
+        "summary": "Get Task Status",
+        "operationId": "getTask",
+        "parameters": [
+          {
+            "name": "task_uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Uuid"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/run/tasks": {
+      "get": {
+        "tags": [
+          "marketplace-run"
+        ],
+        "summary": "List Tasks",
+        "operationId": "listTasks",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "model_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Model Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerTaskListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/v1/pricing/model-pricing/{model_id}": {
+      "get": {
+        "tags": [
+          "pricing"
+        ],
+        "summary": "Get current model pricing",
+        "operationId": "getModelPricing",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Model Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          },
+          {
+            "name": "access_token",
+            "in": "cookie",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Access Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicModelPricingResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pricing/preview": {
+      "post": {
+        "tags": [
+          "pricing"
+        ],
+        "summary": "Preview model price",
+        "description": "Calculate an API Key Pool price, falling back to the default Pool for sessions.",
+        "operationId": "previewPrice",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          },
+          {
+            "name": "access_token",
+            "in": "cookie",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Access Token"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PricePreviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PricePreviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiModelDetail": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "name": {
+            "$ref": "#/components/schemas/I18nText"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/I18nText"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "task_type": {
+            "type": "string",
+            "title": "Task Type"
+          },
+          "execution_queue_class": {
+            "$ref": "#/components/schemas/ExecutionQueueClass",
+            "default": "fast"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "default": []
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "is_featured": {
+            "type": "boolean",
+            "title": "Is Featured"
+          },
+          "thumbnail_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thumbnail Url"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "parameters": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Parameters"
+          },
+          "display_order": {
+            "type": "integer",
+            "title": "Display Order",
+            "default": 0
+          },
+          "has_documentation": {
+            "type": "boolean",
+            "title": "Has Documentation",
+            "default": false
+          },
+          "available_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Available Languages",
+            "default": []
+          },
+          "output_schema": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Schema"
+          },
+          "examples": {
+            "items": {
+              "$ref": "#/components/schemas/ModelExample"
+            },
+            "type": "array",
+            "title": "Examples",
+            "default": []
+          },
+          "internal_notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Internal Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "model_id",
+          "name",
+          "task_type",
+          "status",
+          "is_featured",
+          "created_at"
+        ],
+        "title": "ApiModelDetail"
+      },
+      "ApiModelListItem": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "name": {
+            "$ref": "#/components/schemas/I18nText"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/I18nText"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "task_type": {
+            "type": "string",
+            "title": "Task Type"
+          },
+          "execution_queue_class": {
+            "$ref": "#/components/schemas/ExecutionQueueClass",
+            "default": "fast"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "default": []
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "is_featured": {
+            "type": "boolean",
+            "title": "Is Featured"
+          },
+          "thumbnail_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thumbnail Url"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "model_id",
+          "name",
+          "task_type",
+          "status",
+          "is_featured",
+          "created_at"
+        ],
+        "title": "ApiModelListItem"
+      },
+      "ApiModelListResponse": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ApiModelListItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "items"
+        ],
+        "title": "ApiModelListResponse"
+      },
+      "ClientCapabilities": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "title": "Contract Version",
+            "default": "2026-10-08"
+          },
+          "run_idempotency_v1": {
+            "type": "boolean",
+            "title": "Run Idempotency V1",
+            "default": true
+          },
+          "idempotency_header": {
+            "type": "string",
+            "title": "Idempotency Header",
+            "default": "X-Request-Id"
+          },
+          "idempotency_retention_seconds": {
+            "type": "integer",
+            "title": "Idempotency Retention Seconds",
+            "default": 86400
+          },
+          "task_read_api_key_scope": {
+            "type": "boolean",
+            "title": "Task Read Api Key Scope",
+            "default": false
+          },
+          "uploads_api_key": {
+            "type": "boolean",
+            "title": "Uploads Api Key",
+            "default": false
+          },
+          "price_preview_prepared_input": {
+            "type": "boolean",
+            "title": "Price Preview Prepared Input",
+            "default": false
+          },
+          "key_model_discovery_v1": {
+            "type": "boolean",
+            "title": "Key Model Discovery V1",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "ClientCapabilities"
+      },
+      "CustomerTaskListItemResponse": {
+        "properties": {
+          "task_uuid": {
+            "type": "string",
+            "title": "Task Uuid"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "pool_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pool Code"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TaskStatus"
+          },
+          "amount": {
+            "type": "number",
+            "title": "Amount",
+            "default": 0
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_uuid",
+          "model_id",
+          "status",
+          "created_at"
+        ],
+        "title": "CustomerTaskListItemResponse"
+      },
+      "CustomerTaskListResponse": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerTaskListItemResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "items"
+        ],
+        "title": "CustomerTaskListResponse"
+      },
+      "DocumentResponse": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "language_code": {
+            "type": "string",
+            "title": "Language Code"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "model_id",
+          "language_code",
+          "content",
+          "created_at"
+        ],
+        "title": "DocumentResponse"
+      },
+      "DynamicParameter": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key",
+            "description": "参数键名"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "textarea",
+              "number",
+              "select",
+              "boolean",
+              "slider",
+              "image_upload",
+              "image_upload_group",
+              "video_upload",
+              "video_upload_group",
+              "audio_upload",
+              "audio_upload_group",
+              "file_upload",
+              "file_upload_group",
+              "array",
+              "object"
+            ],
+            "title": "Type",
+            "description": "参数类型"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required",
+            "description": "是否必填",
+            "default": false
+          },
+          "label": {
+            "$ref": "#/components/schemas/I18nText",
+            "description": "显示标签"
+          },
+          "placeholder": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/I18nText"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/I18nText"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default"
+          },
+          "example": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Example"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SelectOption"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Options"
+          },
+          "option_value_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "string",
+                  "int",
+                  "float"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Option Value Type"
+          },
+          "min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min"
+          },
+          "max": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step"
+          },
+          "max_length": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Length"
+          },
+          "min_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Count"
+          },
+          "max_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Count"
+          },
+          "accept": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accept"
+          },
+          "items_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "string",
+                  "number",
+                  "object"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Items Type"
+          },
+          "object_properties": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DynamicParameter"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Object Properties"
+          },
+          "show_if": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ParameterCondition"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group"
+          },
+          "probe_duration": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Probe Duration"
+          },
+          "count_chars": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count Chars",
+            "description": "是否在计费时统计此文本参数的字符数，并以固定 key char_count 注入计费参数。多个 count_chars 参数会汇总字符数。"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "type",
+          "label"
+        ],
+        "title": "DynamicParameter"
+      },
+      "ExecutionQueueClass": {
+        "type": "string",
+        "enum": [
+          "fast",
+          "slow"
+        ],
+        "title": "ExecutionQueueClass"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "I18nText": {
+        "properties": {
+          "zh": {
+            "type": "string",
+            "title": "Zh",
+            "default": ""
+          },
+          "en": {
+            "type": "string",
+            "title": "En",
+            "default": ""
+          },
+          "ja": {
+            "type": "string",
+            "title": "Ja",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "I18nText"
+      },
+      "ModelExample": {
+        "properties": {
+          "input": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Input"
+          },
+          "output": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Output"
+          }
+        },
+        "type": "object",
+        "title": "ModelExample"
+      },
+      "ModelRunRequest": {
+        "properties": {
+          "input": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Input",
+            "description": "输入参数"
+          },
+          "webhook_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Webhook Url",
+            "description": "回调 URL"
+          },
+          "priority": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Priority",
+            "description": "任务优先级，仅 internal API key 可设置；数值越大越优先"
+          }
+        },
+        "type": "object",
+        "required": [
+          "input"
+        ],
+        "title": "ModelRunRequest"
+      },
+      "ModelRunResponse": {
+        "properties": {
+          "task_uuid": {
+            "type": "string",
+            "title": "Task Uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TaskStatus"
+          },
+          "estimated_time": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimated Time"
+          },
+          "output": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_uuid",
+          "status"
+        ],
+        "title": "ModelRunResponse"
+      },
+      "ParameterCondition": {
+        "properties": {
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field"
+          },
+          "value": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "title": "ParameterCondition"
+      },
+      "PricePreviewRequest": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Model Id"
+          },
+          "input_params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Input Params"
+          },
+          "priced_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Priced At",
+            "description": "按该时刻的潮汐定价窗口预览；留空表示当前时刻"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id"
+        ],
+        "title": "PricePreviewRequest"
+      },
+      "PricePreviewResponse": {
+        "properties": {
+          "list_price": {
+            "type": "number",
+            "title": "List Price"
+          },
+          "discount_rate": {
+            "type": "number",
+            "title": "Discount Rate"
+          },
+          "final_price": {
+            "type": "number",
+            "title": "Final Price"
+          },
+          "discount_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Reason"
+          },
+          "you_save": {
+            "type": "number",
+            "title": "You Save"
+          },
+          "pricing_window": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pricing Window",
+            "description": "命中的潮汐定价窗口名"
+          }
+        },
+        "type": "object",
+        "required": [
+          "list_price",
+          "discount_rate",
+          "final_price",
+          "you_save"
+        ],
+        "title": "PricePreviewResponse"
+      },
+      "PublicModelPricingResponse": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "pricing_config": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pricing Config",
+            "description": "价格配置"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "discount_rate": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Discount Rate",
+            "description": "当前用户适用的折扣率",
+            "default": 1
+          },
+          "discount_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Description",
+            "description": "当前用户适用的折扣说明"
+          },
+          "active_pricing_window": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Pricing Window",
+            "description": "当前时刻命中的潮汐定价窗口名；None 表示按基础（高峰）价"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id",
+          "version"
+        ],
+        "title": "PublicModelPricingResponse"
+      },
+      "SelectOption": {
+        "properties": {
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ],
+            "title": "Value"
+          },
+          "label": {
+            "$ref": "#/components/schemas/I18nText"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "label"
+        ],
+        "title": "SelectOption"
+      },
+      "TaskStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "processing",
+          "polling",
+          "waiting_callback",
+          "post_processing",
+          "completed",
+          "failed",
+          "cancelled"
+        ],
+        "title": "TaskStatus"
+      },
+      "TaskStatusResponse": {
+        "properties": {
+          "task_uuid": {
+            "type": "string",
+            "title": "Task Uuid"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "pool_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pool Code"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TaskStatus"
+          },
+          "progress": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Progress"
+          },
+          "output": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "meta_info": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta Info"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_uuid",
+          "model_id",
+          "status",
+          "created_at"
+        ],
+        "title": "TaskStatusResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

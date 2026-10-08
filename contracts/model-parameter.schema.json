@@ -1,0 +1,371 @@
+{
+  "$defs": {
+    "DynamicParameter": {
+      "properties": {
+        "key": {
+          "description": "参数键名",
+          "title": "Key",
+          "type": "string"
+        },
+        "type": {
+          "description": "参数类型",
+          "enum": [
+            "text",
+            "textarea",
+            "number",
+            "select",
+            "boolean",
+            "slider",
+            "image_upload",
+            "image_upload_group",
+            "video_upload",
+            "video_upload_group",
+            "audio_upload",
+            "audio_upload_group",
+            "file_upload",
+            "file_upload_group",
+            "array",
+            "object"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "required": {
+          "default": false,
+          "description": "是否必填",
+          "title": "Required",
+          "type": "boolean"
+        },
+        "label": {
+          "$ref": "#/$defs/I18nText",
+          "description": "显示标签"
+        },
+        "placeholder": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/I18nText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/I18nText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "default": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default"
+        },
+        "example": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Example"
+        },
+        "options": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/SelectOption"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Options"
+        },
+        "option_value_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "string",
+                "int",
+                "float"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Option Value Type"
+        },
+        "min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min"
+        },
+        "max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max"
+        },
+        "step": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Step"
+        },
+        "max_length": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Length"
+        },
+        "min_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Count"
+        },
+        "max_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Count"
+        },
+        "accept": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accept"
+        },
+        "items_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "string",
+                "number",
+                "object"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Items Type"
+        },
+        "object_properties": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/DynamicParameter"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Object Properties"
+        },
+        "show_if": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ParameterCondition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Group"
+        },
+        "probe_duration": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Probe Duration"
+        },
+        "count_chars": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "是否在计费时统计此文本参数的字符数，并以固定 key char_count 注入计费参数。多个 count_chars 参数会汇总字符数。",
+          "title": "Count Chars"
+        }
+      },
+      "required": [
+        "key",
+        "type",
+        "label"
+      ],
+      "title": "DynamicParameter",
+      "type": "object"
+    },
+    "I18nText": {
+      "properties": {
+        "zh": {
+          "default": "",
+          "title": "Zh",
+          "type": "string"
+        },
+        "en": {
+          "default": "",
+          "title": "En",
+          "type": "string"
+        },
+        "ja": {
+          "default": "",
+          "title": "Ja",
+          "type": "string"
+        }
+      },
+      "title": "I18nText",
+      "type": "object"
+    },
+    "ParameterCondition": {
+      "properties": {
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "value": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "title": "ParameterCondition",
+      "type": "object"
+    },
+    "SelectOption": {
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ],
+          "title": "Value"
+        },
+        "label": {
+          "$ref": "#/$defs/I18nText"
+        }
+      },
+      "required": [
+        "value",
+        "label"
+      ],
+      "title": "SelectOption",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/DynamicParameter"
+}

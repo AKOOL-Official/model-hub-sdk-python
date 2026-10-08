@@ -1,0 +1,18 @@
+{
+  "model_id": "example/video model",
+  "name": {"en": "Example video", "zh": "示例视频"},
+  "task_type": "video",
+  "parameters": [
+    {"key": "prompt", "type": "text", "required": true, "max_length": 100, "description": {"en": "Scene description"}},
+    {"key": "duration", "type": "select", "options": [{"value": 5}, {"value": 10}], "default": 5},
+    {"key": "enabled", "type": "select", "options": [{"value": true}, {"value": false}]},
+    {"key": "scale", "type": "slider", "min": 0.0, "max": 1.5},
+    {"key": "small", "type": "number", "min": 0.0000001},
+    {"key": "references", "type": "image_upload_group", "min_count": 1, "max_count": 3},
+    {"key": "advanced", "type": "object", "default": {"keep_this_key": true}, "object_properties": [{"key": "seed", "type": "number"}]},
+    {"key": "optional", "type": "text", "required": true, "show_if": {"field": "enabled", "value": true}},
+    {"key": "new", "type": "future_type"}
+  ],
+  "output_schema": {"type": "object", "properties": {"video_url": {"type": "string", "format": "uri"}}},
+  "examples": [{"input": {"prompt": "A scene"}, "output": {"video_url": "https://example.com/out.mp4"}}]
+}

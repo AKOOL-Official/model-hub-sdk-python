@@ -1,0 +1,87 @@
+{
+  "model_id": "example/video model",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "prompt": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "Scene description"
+      },
+      "duration": {
+        "enum": [
+          5,
+          10
+        ],
+        "default": 5
+      },
+      "enabled": {
+        "enum": [
+          true,
+          false
+        ]
+      },
+      "scale": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 1.5
+      },
+      "small": {
+        "type": "number",
+        "minimum": 1e-07
+      },
+      "references": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uri"
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "advanced": {
+        "type": "object",
+        "properties": {
+          "seed": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": true,
+        "default": {
+          "keep_this_key": true
+        }
+      },
+      "optional": {
+        "type": "string",
+        "x-model-hub-show-if": {
+          "field": "enabled",
+          "value": true
+        }
+      },
+      "new": {
+        "x-model-hub-parameter": {
+          "key": "new",
+          "type": "future_type"
+        }
+      }
+    },
+    "additionalProperties": true,
+    "required": [
+      "prompt"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "video_url": {
+        "type": "string",
+        "format": "uri"
+      }
+    }
+  },
+  "schema_hash": "5ca561976676fe73eff7475b79ec75da064fbcf44d8f1537c69620adf4b341eb",
+  "warnings": [
+    "Conditional visibility for optional is a hint, not a required constraint",
+    "Unsupported parameter type for new: future_type"
+  ]
+}
